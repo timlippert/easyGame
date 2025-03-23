@@ -1,4 +1,5 @@
 import pygame
+from pygame.examples.grid import Player
 from pygame.locals import (
     K_UP,
     K_DOWN,
@@ -10,16 +11,30 @@ from pygame.locals import (
 )
 
 pygame.init()
+player = pygame.Rect((300,250,50,50))
 screen = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("My Game")
 running = True
 while running:
+    screen.fill((0,0,0))
+    pygame.draw.rect(screen, (255,0,0), player)
+    key = pygame.key.get_pressed()
+    if key[pygame.K_a]:
+        player.move_ip(-1, 0)
+
+    elif key[pygame.K_d]:
+            player.move_ip(1, 0)
+
+    if key[pygame.K_w]:
+        player.move_ip(0, -1)
+
+    if key[pygame.K_s]:
+        player.move_ip(0, 1)
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False 
-    screen.fill((255, 255, 255))
-    pygame.draw.circle(screen, (0,0,255), (250, 250), 75)
-    pygame.display.flip()
+    pygame.display.update()
 pygame.quit()
 
 
